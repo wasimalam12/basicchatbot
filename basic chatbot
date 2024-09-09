@@ -1,0 +1,41 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk.corpus import wordnet
+
+# Ensure necessary NLTK data is available
+nltk.download('punkt')
+nltk.download('wordnet')
+
+# Simple chatbot class
+class SimpleChatbot:
+    def __init__(self):
+        self.responses = {
+            "hello": "Hi there! How can I assist you today?",
+            "how are you": "I'm just a program, but I'm doing well. How can I help you?",
+            "bye": "Goodbye! Have a great day!",
+        }
+
+    def get_response(self, user_input):
+        # Tokenize the input
+        tokens = word_tokenize(user_input.lower())
+        # Check for predefined responses
+        for token in tokens:
+            if token in self.responses:
+                return self.responses[token]
+        # Default response
+        return "Sorry, I don't understand that."
+
+    def chat(self):
+        print("Chatbot: Hello! Type 'bye' to exit.")
+        while True:
+            user_input = input("You: ")
+            if user_input.lower() == "bye":
+                print("Chatbot: Goodbye! Have a great day!")
+                break
+            response = self.get_response(user_input)
+            print(f"Chatbot: {response}")
+
+# Run the chatbot
+if __name__ == "__main__":
+    bot = SimpleChatbot()
+    bot.chat()
